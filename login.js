@@ -1,0 +1,123 @@
+// ===== إعدادات السيرفر =====
+const API_BASE = "http://172.237.101.38:3000";
+
+// عناصر الصفحة
+const emailInput = document.getElementById("emailInput");
+const codeInput = document.getElementById("codeInput");
+const sendCodeBtn = document.getElementById("sendCodeBtn");
+const verifyBtn = document.getElementById("verifyBtn");
+const codeBox = document.getElementById("codeBox");
+const msg = document.getElementById("msg");
+
+function setMsg(text, type) {
+  msg.textContent = text || "";
+  msg.className = "msg";
+  if (type) msg.classList.add(type);
+}
+
+function normalizeEmail(email) {
+  return String(email || "").trim().toLowerCase();
+}
+
+/* =========================
+   إرسال كود التحقق
+========================= */
+sendCodeBtn.addEventListener("click", async () => {
+  const email = normalizeEmail(emailInput.value);
+
+  if (!email) {
+    return setMsg("أدخل البريد الإلكتروني.", "error");
+  }
+
+  // ✅ السماح فقط ببريد qi.iq
+  const allowedDomain = "@qi.iq";
+  if (!email.endsWith(allowedDomain)) {
+    return setMsg("يسمح فقط ببريد الشركة (@qi.iq)", "error");
+  }
+
+  sendCodeBtn.disabled = true;
+  setMsg("جاري إرسال رمز التحقق...", "");
+
+  try {
+    const res = await fetch(`${API_BASE}/api/auth/send-code`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email })
+    });
+
+    const data = await res.json().catch(() => ({}));
+
+    if (!res.ok || !data.success) {
+      setMsg(data.message || "فشل إرسال الرمز.", "error");
+      sendCodeBtn.disabled = false;
+      return;
+    }
+
+    // إظهار حقل الرمز
+    codeBox.classList.remove("hidden");
+    setMsg("تم إرسال رمز التحقق ✅", "success");
+    codeInput.focus();
+
+    if (data.sessionId) {
+      localStorage.setItem("qicard_session_id", data.sessionId);
+    }
+
+  } catch (err) {
+    setMsg("تعذر الاتصال بالسيرفر.", "error");
+  } finally {
+    sendCodeBtn.disabled = false;
+  }
+});
+
+/* =========================
+   التحقق من الرمز
+========================= */
+verifyBtn.addEventListener("click", async () => {
+  const email = normalizeEmail(emailInput.value);
+  const code = String(codeInput.value || "").trim();
+  const sessionId = localStorage.getItem("qicard_session_id");
+
+  if (!email) {
+    return setMsg("أدخل البريد الإلكتروني.", "error");
+  }
+
+  if (code.length !== 6) {
+    return setMsg("رمز التحقق يجب أن يكون 6 أرقام.", "error");
+  }
+
+  verifyBtn.disabled = true;
+  setMsg("جاري التحقق...", "");
+
+  try {
+    const res = await fetch(`${API_BASE}/api/auth/verify-code`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, code, sessionId })
+    });
+
+    const data = await res.json().catch(() => ({}));
+
+    if (!res.ok || !data.success) {
+      setMsg(data.message || "رمز غير صحيح.", "error");
+      verifyBtn.disabled = false;
+      return;
+    }
+
+    // ✅ تسجيل الدخول
+    localStorage.setItem("qicard_kb_logged_in", "1");
+    if (data.token) {
+      localStorage.setItem("qicard_token", data.token);
+    }
+
+    setMsg("تم تسجيل الدخول بنجاح ✅", "success");
+
+    setTimeout(() => {
+      window.location.href = "dashboard.html";
+    }, 600);
+
+  } catch (err) {
+    setMsg("تعذر الاتصال بالسيرفر.", "error");
+  } finally {
+    verifyBtn.disabled = false;
+  }
+});

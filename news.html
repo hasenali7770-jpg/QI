@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <title>الأخبار</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="global.css">
+  <link rel="stylesheet" href="news.css">
+  <link rel="stylesheet" href="sidebar.css">
+
+</head>
+
+<body>
+
+  <!-- Sidebar -->
+  <div id="sidebar"></div>
+  <script src="sidebar.js"></script>
+
+  <!-- Navbar -->
+  <div class="top-nav">
+    <div class="nav-left">
+      <h1>الأخبار</h1>
+      <p class="nav-sub">إدارة الأخبار والمحتوى</p>
+    </div>
+
+    <div class="nav-center">
+      <h2 class="kb-title">Customer Care Knowledge Base</h2>
+    </div>
+  </div>
+
+  <!-- Search -->
+  <div class="news-search-area">
+    <input type="text" id="searchInput" class="news-search" placeholder="ابحث عن خبر..." />
+  </div>
+
+  <!-- Add (Admin only) -->
+  <div class="add-news-area">
+    <button id="addNewsBtn" class="add-btn" onclick="openAddNews()">
+      + إضافة خبر
+    </button>
+  </div>
+
+  <!-- Grid -->
+  <main class="news-content">
+    <div class="news-grid" id="newsGrid"></div>
+  </main>
+
+  <!-- Popup -->
+  <div class="popup-overlay" id="popupAdd">
+    <div class="popup-box">
+      <h2 class="popup-title">إضافة خبر جديد</h2>
+
+      <input id="popupTitle" class="popup-input" placeholder="عنوان الخبر...">
+      <textarea id="popupDesc" class="popup-textarea" placeholder="وصف مختصر..."></textarea>
+
+      <label class="upload-box">
+        <input type="file" id="popupImage" accept="image/*">
+        اختر صورة أو اسحبها هنا
+      </label>
+
+      <div class="popup-btns">
+        <button class="btn confirm" onclick="confirmAdd()">إضافة</button>
+        <button class="btn cancel" onclick="closePopup()">إلغاء</button>
+      </div>
+    </div>
+  </div>
+<footer class="footer">
+  <p>Developed by <strong>Jawad Kadhim. ALL RIGHTS RESERVED.</strong> © 2025</p>
+</footer>
+  <script type="module" src="news.js"></script>
+</body>
+</html>

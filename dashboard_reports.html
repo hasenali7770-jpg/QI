@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>Dashboard Reports</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="dashboard_reports.css">
+</head>
+
+<body>
+
+<div class="dashboard">
+
+  <div class="card">
+    <div class="dot"></div>
+    <div class="label">التقارير (KPI)</div>
+    <div class="value" data-count id="kpiCount">0</div>
+  </div>
+
+  <div class="card">
+    <div class="dot"></div>
+    <div class="label">آخر تقرير</div>
+    <div class="value small" id="lastKpi">—</div>
+  </div>
+
+  <div class="card">
+    <div class="dot"></div>
+    <div class="label">عدد المهام</div>
+    <div class="value" data-count id="tasksCount">0</div>
+  </div>
+
+  <div class="card">
+    <div class="dot"></div>
+    <div class="label">التقارير المقفلة</div>
+    <div class="value" data-count id="lockedCount">0</div>
+  </div>
+
+</div>
+
+<script src="dashboard_reports.js"></script>
+</body>
+</html>

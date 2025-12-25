@@ -1,0 +1,252 @@
+/* ===================== RESET ===================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Cairo", sans-serif;
+  background: #eef3f9;
+  direction: rtl;
+}
+
+/* ===================== SIDEBAR ===================== */
+.sidebar {
+  width: 260px;
+  height: 100vh;
+  background: #050816;
+  color: white;
+  position: fixed;
+  left: 0;
+  top: 0;
+  padding: 30px 20px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.side-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  padding-left: 8px;
+}
+
+.menu li {
+  list-style: none;
+  padding: 14px 18px;
+  margin-bottom: 10px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  opacity: 0.85;
+  transition: 0.25s ease;
+  font-size: 16px;
+}
+
+.menu li:hover {
+  background: rgba(255, 255, 255, 0.12);
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+.menu li.active {
+  background: #0f162e;
+  opacity: 1;
+}
+
+/* النقطة (إظهار فقط عند Active) */
+.menu li .dot {
+  width: 10px;
+  height: 10px;
+  background: #4b6fff;
+  border-radius: 50%;
+  display: none;
+}
+
+.menu li.active .dot {
+  display: inline-block;
+}
+
+/* ===================== NAVBAR ===================== */
+.top-nav {
+  height: 80px;
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  position: fixed;
+  top: 0;
+  left: 260px;  /* نفس عرض السايدبار */
+  right: 0;
+
+  /* توزيع navbar إلى 3 أقسام (يسار - وسط - يمين) */
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+
+  padding: 0 40px;
+  z-index: 1000;
+}
+
+/* يسار */
+.nav-left h1 {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+/* وسط */
+.nav-center {
+  text-align: center;
+}
+
+.kb-title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* يمين */
+.nav-right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* اسم المستخدم + زر الضوء/الظلام */
+.toggle-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #f3f4f6;
+  padding: 6px 15px;
+  border-radius: 999px;
+}
+
+.user-name {
+  font-size: 14px;
+  color: #555;
+}
+
+.toggle {
+  width: 46px;
+  height: 22px;
+  background: #d1d5db;
+  border-radius: 999px;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  transition: 0.3s;
+}
+
+.knob {
+  width: 18px;
+  height: 18px;
+  background: #9ca3af;
+  border-radius: 50%;
+  transition: 0.3s ease;
+}
+
+/* ===================== MAIN SPACING ===================== */
+.dashboard-content {
+  margin-left: 260px; /* يترك مكان للسايدبار */
+  margin-top: 95px;  /* يترك مكان للنافبار */
+  padding: 30px;
+}
+.menu-icon {
+  width: 10px;
+  height: 10px;
+  background: #4b6fff;
+  border-radius: 50%;
+  display: inline-block;
+}
+.dashboard-search-area {
+  margin-left: 260px;
+  margin-top: 95px;
+  padding: 0 40px;
+}
+
+.dashboard-search {
+  width: 50%;
+  padding: 14px 18px;
+  border-radius: 50px;
+  border: 1px solid #d1d5db;
+  background: white;
+  font-size: 15px;
+  outline: none;
+}
+/* ===============================
+   THEME VARIABLES
+================================ */
+:root{
+  --bg:#eef3fb;
+  --card:#ffffff;
+  --text:#111827;
+  --muted:#6b7280;
+  --border:#e5e7eb;
+  --shadow: 0 10px 30px rgba(0,0,0,.06);
+}
+
+body{
+  background: var(--bg);
+  color: var(--text);
+  transition: background .35s ease, color .35s ease;
+}
+
+/* Dark */
+body.dark{
+  --bg:#0b1220;
+  --card:#121c2f;
+  --text:#e5e7eb;
+  --muted:#94a3b8;
+  --border:#1f2a44;
+  --shadow: 0 16px 40px rgba(0,0,0,.35);
+}
+
+/* Smooth transitions for main UI blocks */
+.top-nav,
+.settings-card,
+.footer{
+  transition: background .35s ease, color .35s ease, border-color .35s ease, box-shadow .35s ease;
+}
+/* Theme flash */
+body.theme-flash{
+  outline: 2px solid rgba(79,124,255,.25);
+  outline-offset: -2px;
+}
+<!--:root{
+  --primary:#0038a8;
+  --accent:#00c2a8;
+  --bg:#f4f7fb;
+  --sidebar-w:260px;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:Cairo, Arial;
+  background:var(--bg);
+  overflow-x:hidden;
+}
+
+/* محتوى الصفحة مع sidebar يسار */
+.main{
+  margin-left:var(--sidebar-w);
+  padding:30px;
+  min-height:100vh;
+  transition:.3s;
+}
+
+/* RTL (لو مشروعك عربي) */
+html[dir="rtl"] .main{
+  margin-left:0;
+  margin-right:var(--sidebar-w);
+}
+
+/* موبايل */
+@media(max-width:900px){
+  .main{
+    margin:0 !important;
+    padding:16px;
+  }
+}
+-->

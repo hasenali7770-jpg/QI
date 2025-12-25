@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>KPI Productivity</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="kpi_productivity.css">
+
+<!-- PDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+<div class="header">
+  <button class="back-btn" onclick="history.back()">←</button>
+
+  <div class="title-group">
+    <h1>KPI Productivity</h1>
+    <input
+      type="text"
+      id="kpiTitle"
+      class="kpi-title-input"
+      placeholder="Enter KPI report name (e.g. September – Team A)"
+    >
+  </div>
+
+  <div class="header-actions">
+    <select id="monthSelect" class="month-select">
+      <option value="01">January</option>
+      <option value="02">February</option>
+      <option value="03">March</option>
+      <option value="04">April</option>
+      <option value="05">May</option>
+      <option value="06">June</option>
+      <option value="07">July</option>
+      <option value="08">August</option>
+      <option value="09" selected>September</option>
+      <option value="10">October</option>
+      <option value="11">November</option>
+      <option value="12">December</option>
+    </select>
+
+    <button class="btn save" onclick="saveReport()">💾 Save</button>
+    <button class="btn pdf" onclick="exportPDF()">PDF</button>
+    <button class="btn excel" onclick="exportExcel()">Excel</button>
+  </div>
+</div>
+
+<!-- ================= TABLE ================= -->
+<div class="table-wrapper">
+
+<table id="kpiTable">
+<thead>
+<tr>
+  <th>KPI</th>
+  <th>Description</th>
+  <th>How it Measured</th>
+  <th>Note</th>
+  <th>Importance</th>
+  <th>Utilization</th>
+  <th>Input</th>
+  <th>Output</th>
+  <th>SLA</th>
+</tr>
+</thead>
+
+<tbody>
+
+<!-- 4 Rows -->
+<tr data-id="row1">
+  <td><input class="kpi-name"></td>
+  <td><input class="kpi-desc"></td>
+  <td><input class="kpi-measure"></td>
+  <td><textarea class="note"></textarea></td>
+  <td><input class="iw"></td>
+  <td><input class="uw"></td>
+  <td><input class="input"></td>
+  <td><input class="output"></td>
+  <td><input class="sla"></td>
+</tr>
+
+<tr data-id="row2">
+  <td><input class="kpi-name"></td>
+  <td><input class="kpi-desc"></td>
+  <td><input class="kpi-measure"></td>
+  <td><textarea class="note"></textarea></td>
+  <td><input class="iw"></td>
+  <td><input class="uw"></td>
+  <td><input class="input"></td>
+  <td><input class="output"></td>
+  <td><input class="sla"></td>
+</tr>
+
+<tr data-id="row3">
+  <td><input class="kpi-name"></td>
+  <td><input class="kpi-desc"></td>
+  <td><input class="kpi-measure"></td>
+  <td><textarea class="note"></textarea></td>
+  <td><input class="iw"></td>
+  <td><input class="uw"></td>
+  <td><input class="input"></td>
+  <td><input class="output"></td>
+  <td><input class="sla"></td>
+</tr>
+
+<tr data-id="row4">
+  <td><input class="kpi-name"></td>
+  <td><input class="kpi-desc"></td>
+  <td><input class="kpi-measure"></td>
+  <td><textarea class="note"></textarea></td>
+  <td><input class="iw"></td>
+  <td><input class="uw"></td>
+  <td><input class="input"></td>
+  <td><input class="output"></td>
+  <td><input class="sla"></td>
+</tr>
+
+</tbody>
+</table>
+</div>
+
+<footer class="footer">
+  <p>Developed by <strong>Jawad Kadhim</strong> © 2025</p>
+</footer>
+
+<script type="module" src="kpi_productivity.js"></script>
+</body>
+</html>

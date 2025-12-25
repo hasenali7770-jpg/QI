@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>تصحيح الامتحان</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin_attempt.css">
+
+  <!-- Excel -->
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.19.3/dist/xlsx.full.min.js"></script>
+
+  <!-- PDF -->
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspdf-autotable@3.5.29/dist/jspdf.plugin.autotable.min.js"></script>
+</head>
+<body>
+
+<div class="top-bar">
+  <button class="btn-back" onclick="location.href='admin_exam.html'">← رجوع</button>
+  <div class="title-box">
+    <h1>تصحيح امتحان الموظف</h1>
+    <p>✅ أخضر تلقائي | ❌ أحمر تلقائي | 🟡 يدوي</p>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="grid">
+    <div class="card" id="infoBox"></div>
+
+    <div class="card">
+      <h3 class="card-title">ملاحظة الأدمن</h3>
+      <p class="muted">تُحفظ داخل نتيجة الموظف وتظهر في التقارير.</p>
+      <textarea id="adminNote" class="note" placeholder="اكتب ملاحظة..."></textarea>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3 class="card-title">الأسئلة + إجابات الموظف</h3>
+    <div id="questionsBox"></div>
+  </div>
+
+  <div class="card result-card">
+    <h3 class="card-title">النتيجة</h3>
+
+    <div class="result-grid">
+      <div class="pill">التلقائي: <b id="autoScore">0</b></div>
+      <div class="pill">اليدوي: <b id="manualScore">0</b></div>
+      <div class="pill primary">النهائي: <b id="totalScore">0</b> / 100</div>
+    </div>
+
+    <div class="result-actions">
+      <button class="btn-mini pdf" id="btnPDF">📄 PDF حقيقي</button>
+      <button class="btn-mini excel" id="btnExcel">📊 Excel حقيقي</button>
+    </div>
+
+    <button class="btn-final" id="btnFinalize">
+      إنهاء التصحيح
+    </button>
+  </div>
+
+</div>
+
+<footer class="footer">
+  Developed by <strong>Jawad Kadhim</strong> © 2025
+</footer>
+
+<div id="finishOverlay" class="finish-overlay">
+  <div class="finish-card">
+    <div class="checkmark">✔</div>
+    <h3>تم إنهاء التصحيح</h3>
+    <p>سيتم تحويلك خلال لحظات…</p>
+  </div>
+</div>
+
+<script type="module" src="admin_attempt.js"></script>
+</body>
+</html>

@@ -1,0 +1,245 @@
+
+
+
+body {
+  background: #eef3f9;
+  font-family: "Cairo", sans-serif;
+}
+
+/* Search Area */
+.shelves-search-area {
+  margin-left: 260px;
+  margin-top: 95px;
+  padding: 0 40px;
+}
+
+.shelves-search {
+  width: 50%;
+  padding: 14px 18px;
+  border-radius: 50px;
+  border: 1px solid #d1d5db;
+  background: white;
+  font-size: 15px;
+  outline: none;
+}
+
+/* Add Shelf Button */
+.add-shelf-area {
+  margin-left: 260px;
+  padding: 20px 40px 0;
+}
+
+.add-btn {
+  background: #0038a8;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 14px;
+  font-size: 15px;
+  cursor: pointer;
+  border: none;
+  transition: 0.25s;
+}
+
+.add-btn:hover {
+  background: #0038a8;
+}
+
+/* Shelves Content */
+.shelves-content {
+  margin-left: 260px;
+  padding: 0 40px 80px;
+  margin-top: 20px;
+}
+
+.shelves-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 28px;
+}
+
+/* Shelf Card */
+.shelf-card {
+  background: white;
+  padding: 22px;
+  border-radius: 18px;
+  border: 1px solid #dde3ed;
+  transition: 0.25s ease, transform 0.25s ease;
+  opacity: 0;
+  transform: translateY(12px);
+  animation: fadeInCard 0.4s forwards;
+}
+
+@keyframes fadeInCard {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.shelf-card:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+/* Image */
+.shelf-img {
+  width: 100%;
+  height: 160px;
+  background: #dce6f7;
+  border-radius: 14px;
+  margin-bottom: 14px;
+  background-size: cover;
+  background-position: center;
+}
+
+.shelf-img.no-img {
+  background: linear-gradient(135deg, #cbd5f5, #e5ecff);
+}
+
+.shelf-card h3 {
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.shelf-card p {
+  color: #777;
+  font-size: 14px;
+  margin-bottom: 14px;
+}
+
+/* Highlight */
+.highlight {
+  background: #fff6b3;
+  padding: 0 2px;
+  border-radius: 4px;
+}
+
+/* Buttons row */
+.btn-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.view-btn,
+.edit-btn,
+.delete-btn {
+  border: none;
+  padding: 8px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 14px;
+  color: white;
+}
+
+.view-btn { background: #0038a8; }
+.edit-btn { background: #00c2a8; }
+.delete-btn { background: #00c2a8; }
+
+.delete-btn:hover {
+  background: #e43d3d;
+}
+
+/* Popup styles (Add + Edit) */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(4px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.popup-box {
+  background: #ffffff;
+  width: 460px;
+  padding: 28px;
+  border-radius: 22px;
+  box-shadow: 0 12px 35px rgba(0,0,0,0.25);
+  animation: popupShow .35s ease;
+}
+
+@keyframes popupShow {
+  0% { opacity: 0; transform: scale(0.80); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.popup-title {
+  text-align: center;
+  margin-bottom: 15px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.popup-input,
+.popup-textarea {
+  width: 100%;
+  margin-bottom: 12px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid #cdd5e2;
+  font-size: 15px;
+}
+
+.popup-textarea {
+  height: 90px;
+  resize: none;
+}
+
+.upload-box {
+  display: block;
+  width: 100%;
+  height: 120px;
+  background: #eef3fb;
+  border: 2px dashed #b8c2d1;
+  border-radius: 18px;
+  cursor: pointer;
+  text-align: center;
+  padding-top: 35px;
+  margin-bottom: 15px;
+  font-size: 14px;
+  color: #6c7b92;
+}
+
+.upload-box input {
+  display: none;
+}
+
+.popup-btns {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn {
+  padding: 10px 20px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.confirm {
+  background: #4b6fff;
+  color: white;
+}
+
+.cancel {
+  background: #ff4b4b;
+  color: white;
+}
+.footer {
+  text-align: center;
+  padding: 18px 0;
+  font-size: 14px;
+  color: #777;
+  margin-top: 40px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.footer strong {
+  color: #4b6fff;
+  font-weight: 700;
+}

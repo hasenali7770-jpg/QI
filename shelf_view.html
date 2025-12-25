@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <title>تفاصيل الرف</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="global.css">
+  <link rel="stylesheet" href="shelf_view.css">
+  <link rel="stylesheet" href="sidebar.css">
+
+</head>
+
+<body>
+
+  <!-- Sidebar -->
+  <div id="sidebar"></div>
+  <script src="sidebar.js"></script>
+
+  <!-- Navbar -->
+  <div class="top-nav">
+    <div class="nav-left">
+      <h1>تفاصيل الرف</h1>
+    </div>
+  </div>
+
+  <div class="view-container">
+    <h2 id="shelfTitle"></h2>
+    <p id="shelfDesc" class="desc"></p>
+
+    <hr>
+
+    <!-- زر الإضافة (Admin فقط) -->
+    <button id="addCardBtn" class="add-card-btn" onclick="openAddCard()">
+      + إضافة بطاقة داخل الرف
+    </button>
+
+    <div class="cards-grid" id="cardsGrid"></div>
+  </div>
+
+  <!-- Popup Add Card -->
+  <div class="popup-overlay" id="popupCard">
+    <div class="popup-box">
+      <h2 class="popup-title">إضافة بطاقة</h2>
+
+      <input type="text" id="cardTitle" placeholder="عنوان البطاقة..." class="popup-input">
+      <textarea id="cardDesc" class="popup-textarea" placeholder="وصف مختصر..."></textarea>
+
+      <label class="upload-box">
+        <input type="file" id="cardImage" accept="image/*">
+        اختر صورة أو اسحبها هنا
+      </label>
+
+      <div class="popup-btns">
+        <button class="btn confirm" onclick="saveCard()">إضافة</button>
+        <button class="btn cancel" onclick="closeCardPopup()">إلغاء</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- مهم جداً -->
+  <script type="module" src="shelf_view.js"></script>
+</body>
+</html>

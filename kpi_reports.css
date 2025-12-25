@@ -1,0 +1,112 @@
+* {
+  box-sizing: border-box;
+  font-family: "Cairo", sans-serif;
+}
+
+body {
+  margin: 0;
+  background: #f4f6f9;
+  color: #333;
+}
+
+/* Header */
+.header {
+  background: linear-gradient(135deg, #0f6dbd, #0b4f8a);
+  color: #fff;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.header h1 {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.back-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,.6);
+  background: transparent;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+/* Content */
+.content {
+  padding: 20px;
+}
+
+/* Table */
+.reports-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+}
+
+.reports-table thead th {
+  text-align: left;
+  padding: 12px;
+  font-size: 13px;
+  color: #555;
+}
+
+.reports-table tbody tr {
+  background: #fff;
+  box-shadow: 0 4px 10px rgba(0,0,0,.04);
+}
+
+.reports-table td {
+  padding: 12px;
+  font-size: 13px;
+}
+
+/* KPI name emphasis */
+.kpi-name {
+  font-weight: 700;
+  color: #0f6dbd;
+}
+
+/* Actions */
+.actions button {
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  margin-right: 6px;
+}
+
+.btn-edit {
+  background: #e3f2fd;
+  color: #0f6dbd;
+}
+
+.btn-delete {
+  background: #fdecea;
+  color: #c62828;
+}
+
+/* Empty */
+.empty {
+  margin-top: 60px;
+  text-align: center;
+  color: #888;
+  font-size: 14px;
+}
+.footer {
+  text-align: center;
+  padding: 18px 0;
+  font-size: 14px;
+  color: #777;
+  margin-top: 40px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.footer strong {
+  color: #4b6fff;
+  font-weight: 700;
+}

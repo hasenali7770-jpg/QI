@@ -1,0 +1,140 @@
+/* PAGE */
+.settings-wrapper{
+  margin-right: 260px;
+  padding: 120px 70px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* CARD */
+.settings-card{
+  background: var(--card);
+  border-radius: 22px;
+  padding: 30px;
+  border: 1px solid var(--border);
+  box-shadow: 0 10px 30px rgba(0,0,0,.05);
+
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  align-items: center;
+  gap: 24px;
+}
+
+/* TEXT */
+.card-info h3{
+  margin: 0 0 8px;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.card-info p{
+  margin: 0;
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* ACTION */
+.card-action{
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+}
+
+/* SWITCH */
+.switch{
+  width: 56px;
+  height: 28px;
+  background: #cbd5e1;
+  border-radius: 999px;
+  position: relative;
+  transition: .3s;
+}
+
+.switch .dot{
+  width: 22px;
+  height: 22px;
+  background: #fff;
+  border-radius: 50%;
+  position: absolute;
+  top: 3px;
+  right: 4px;
+  transition: .3s;
+}
+
+.switch.active{
+  background: #4c74ff;
+}
+
+.switch.active .dot{
+  right: 30px;
+}
+
+/* USER BOX */
+.user-box{
+  background: rgba(79,124,255,.08);
+  border: 1px dashed rgba(79,124,255,.35);
+  border-radius: 16px;
+  padding: 16px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  font-size: 14px;
+  color: var(--text);
+}
+
+.role-badge{
+  margin-right: 6px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: #4c74ff;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* FOOTER */
+.footer{
+  text-align: center;
+  padding: 20px;
+  margin-right: 260px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px){
+  .settings-wrapper{
+    margin-right: 0;
+    padding: 90px 20px;
+  }
+
+  .settings-card{
+    grid-template-columns: 1fr;
+  }
+}
+.settings-card{
+  background: var(--card);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.card-info h3{ color: var(--text); }
+.card-info p{ color: var(--muted); }
+
+.user-box{
+  color: var(--text);
+  background: rgba(79,124,255,.10);
+  border: 1px dashed rgba(79,124,255,.45);
+}
+
+/* Footer */
+.footer{
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+}

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Exam Builder</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="exam_builder.css">
+</head>
+<body>
+
+<div class="top">
+  <button class="btn back" onclick="location.href='dashboard.html'">← رجوع</button>
+  <div class="t">
+    <h1>Exam Builder</h1>
+    <p>امتحان واحد Active فقط</p>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="card">
+    <div class="grid">
+      <div class="field">
+        <label>عنوان الامتحان</label>
+        <input id="examTitle" placeholder="مثال: Knowledge Assessment CC December">
+      </div>
+      <div class="field">
+  <label>القسم المستهدف للامتحان</label>
+  <select id="examSection">
+    <option value="Inbound">Inbound</option>
+    <option value="Outbound">Outbound</option>
+    <option value="NOVIP">NOVIP</option>
+  </select>
+</div>
+
+      <div class="field">
+        <label>وصف</label>
+        <input id="examDesc" placeholder="وصف قصير...">
+      </div>
+      <div class="field">
+        <label>المدة (دقائق)</label>
+        <input id="durationMin" type="number" min="1" value="20">
+      </div>
+      <div class="field">
+        <label>درجة النجاح</label>
+        <input id="passScore" type="number" min="0" value="60">
+      </div>
+      <div class="field">
+        <label>الحالة</label>
+        <select id="examStatus">
+          <option value="draft">draft</option>
+          <option value="active">active</option>
+          <option value="closed">closed</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>القسم الحالي (للإضافة)</label>
+        <select id="currentSection">
+          <option>Inbound</option>
+          <option>Outbound</option>
+          <option>NOVIP</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row">
+      <button class="btn primary" id="btnNewExam">إنشاء Exam</button>
+      <button class="btn" id="btnLoadActive">تحميل Active</button>
+      <button class="btn success" id="btnSave">حفظ</button>
+      <button class="btn danger" id="btnDelete">حذف</button>
+      <button class="btn" id="btnAddQ">+ إضافة سؤال</button>
+    </div>
+
+    <div class="hint" id="hint">—</div>
+  </div>
+
+  <div id="questionsWrap"></div>
+
+</div>
+
+<script type="module" src="exam_builder.js"></script>
+</body>
+</html>

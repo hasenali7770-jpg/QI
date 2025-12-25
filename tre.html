@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>TRE</title>
+
+<link rel="stylesheet" href="sidebar.css">
+<link rel="stylesheet" href="tre.css">
+</head>
+<body>
+
+<div id="sidebar"></div>
+<script src="sidebar.js"></script>
+
+<div class="page">
+  <div class="header">
+    <h1>TRE – Employee Tasks</h1>
+  </div>
+
+  <div class="table">
+    <div class="thead">
+      <div>الاسم</div>
+      <div>ID</div>
+      <div>الإجراء</div>
+    </div>
+
+    <div id="empRows"></div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div id="taskModal" class="modal hidden" aria-hidden="true">
+  <div class="modal-card">
+    <button class="close-x" id="closeModalX">✖</button>
+
+    <h2 id="modalTitle"></h2>
+
+    <table class="task-table">
+      <thead>
+        <tr>
+          <th>Task Name</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="taskBody"></tbody>
+    </table>
+
+    <div class="modal-footer">
+      <button id="addTask" class="btn btn-secondary">➕ إضافة Task</button>
+
+      <div class="modal-actions">
+        <button id="saveTasks" class="btn btn-primary">💾 حفظ</button>
+        <button id="closeModal" class="btn btn-ghost">إغلاق</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="tre.js"></script>
+</body>
+</html>

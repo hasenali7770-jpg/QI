@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Suggestion Form</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="global.css">
+  <link rel="stylesheet" href="suggestion.css">
+  <link rel="stylesheet" href="sidebar.css">
+
+</head>
+
+<body>
+
+  <!-- Sidebar -->
+  <div id="sidebar"></div>
+  <script src="sidebar.js"></script>
+
+  <!-- Navbar -->
+  <div class="top-nav">
+    <div></div>
+
+    <h1 class="page-title">Suggestion Form</h1>
+
+    <div class="toggle-box">
+      <span class="user-name">Jawad</span>
+      <div class="toggle">
+        <div class="knob"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Page Content -->
+  <div class="content-area">
+
+    <div class="suggestion-box">
+      <h2>نموذج الاقتراحات</h2>
+
+      <input id="empName" type="text" class="form-input" placeholder="اسم الموظف">
+      <input id="empID" type="text" class="form-input" placeholder="المعرف الوظيفي (Employee ID)">
+      <input id="email" type="email" class="form-input" placeholder="البريد الإلكتروني">
+      <input id="title" type="text" class="form-input" placeholder="عنوان الاقتراح">
+      <textarea id="details" class="form-input" placeholder="تفاصيل الاقتراح"></textarea>
+
+      <button class="send-btn" onclick="sendSuggestion()">إرسال</button>
+    </div>
+
+  </div>
+
+  <script>
+    function sendSuggestion() {
+
+      // أخذ المعلومات من الحقول:
+      const data = {
+        name: document.getElementById("empName").value,
+        id: document.getElementById("empID").value,
+        email: document.getElementById("email").value,
+        title: document.getElementById("title").value,
+        details: document.getElementById("details").value,
+      };
+
+      // رابط API — الذي أعطيتني إياه
+      const API_URL = "https://script.google.com/macros/s/AKfycbwWu5vMp4W96bm84OmrWgZwnqGm9i9v_9s35lsQuesu4r1U_hWOlTyea--WTXyX1s1R/exec";
+
+      // تحقق من الحقول الفارغة
+      if (!data.name || !data.id || !data.email || !data.title || !data.details) {
+        alert("الرجاء ملء جميع الحقول قبل الإرسال.");
+        return;
+      }
+
+      // إرسال البيانات
+      fetch(API_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      })
+      .then(() => {
+        alert("تم إرسال الاقتراح بنجاح! 🎉");
+        
+        // مسح الحقول بعد الإرسال
+        document.getElementById("empName").value = "";
+        document.getElementById("empID").value = "";
+        document.getElementById("email").value = "";
+        document.getElementById("title").value = "";
+        document.getElementById("details").value = "";
+      })
+      .catch(err => {
+        alert("حدث خطأ أثناء الإرسال. تأكد من صحة API.");
+        console.log(err);
+      });
+
+    }
+  </script>
+<footer class="footer">
+  <p>Developed by <strong>Jawad Kadhim. ALL RIGHTS RESERVED.</strong> © 2025</p>
+</footer>
+</body>
+</html>

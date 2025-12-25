@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard | الامتحانات الشهرية</title>
+
+  <link rel="stylesheet" href="global.css">
+  <link rel="stylesheet" href="dashboard_exam.css">
+<link rel="stylesheet" href="sidebar.css">
+
+  <!-- Chart.js Library -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<div id="sidebar"></div>
+<script src="sidebar.js"></script>
+
+<div class="top-nav">
+  <div class="nav-left">
+    <h1>Dashboard – الامتحانات الشهرية</h1>
+    <p class="nav-sub">رؤية كاملة لنتائج الموظفين</p>
+  </div>
+
+  <div class="nav-center">
+    <h2 class="kb-title">Exam Analytics</h2>
+  </div>
+</div>
+
+
+<div class="dash-container">
+
+  <!-- الاحصائيات -->
+  <div class="stats-grid">
+    <div class="stat-card">
+      <h3>📘 عدد المشاركين</h3>
+      <p id="totalEmployees">0</p>
+    </div>
+
+    <div class="stat-card">
+      <h3>🏆 معدل النجاح</h3>
+      <p id="successRate">0%</p>
+    </div>
+
+    <div class="stat-card">
+      <h3>❌ معدل الرسوب</h3>
+      <p id="failRate">0%</p>
+    </div>
+
+    <div class="stat-card">
+      <h3>📊 متوسط الدرجات</h3>
+      <p id="avgScore">0</p>
+    </div>
+  </div>
+
+
+  <!-- أفضل 3 -->
+  <h2 class="section-title">👑 أفضل 3 موظفين</h2>
+  <div id="top3" class="top3-grid"></div>
+
+
+  <!-- الرسوم البيانية -->
+  <div class="charts-grid">
+    <div class="chart-box">
+      <canvas id="successFailChart"></canvas>
+    </div>
+    <div class="chart-box">
+      <canvas id="scoresChart"></canvas>
+    </div>
+  </div>
+
+  <!-- آخر موظف -->
+  <h2 class="section-title">📅 آخر موظف أكمل الامتحان</h2>
+  <div id="lastEmployeeBox" class="last-emp-box">—</div>
+
+  <!-- أزرار الإدارة -->
+  <div class="admin-actions">
+    <button onclick="window.location='admin_exam.html'">لوحة النتائج</button>
+    <button onclick="window.location='exam_builder.html'">إدارة الأسئلة</button>
+    <button onclick="exportAllPDF()">PDF جماعي</button>
+    <button onclick="exportExcelFromAdmin()">Excel</button>
+  </div>
+
+</div>
+
+<script src="bulk_pdf_export.js"></script>
+<script src="excel_export.js"></script>
+<script src="dashboard_exam.js"></script>
+
+</body>
+</html>

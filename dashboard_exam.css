@@ -1,0 +1,114 @@
+.dash-container {
+  margin-left: 260px;
+  padding: 30px 40px;
+}
+
+.section-title {
+  margin-top: 35px;
+  margin-bottom: 10px;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.stat-card {
+  background: white;
+  padding: 20px;
+  border-radius: 16px;
+  border: 1px solid #d7dee9;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  transition: .3s;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+}
+
+.stat-card h3 {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.stat-card p {
+  font-size: 26px;
+  font-weight: 700;
+  margin-top: 8px;
+  color: #2961ff;
+}
+
+.top3-grid {
+  display: flex;
+  gap: 14px;
+}
+
+.top3-item {
+  flex: 1;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 18px;
+  border: 1px solid #d7dee9;
+  text-align: center;
+  transition: 0.25s;
+}
+
+.top3-item:hover {
+  transform: scale(1.03);
+}
+
+.top3-item h3 {
+  margin: 6px 0;
+}
+
+.top3-rank {
+  font-size: 36px;
+  color: gold;
+}
+
+.charts-grid {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.chart-box {
+  background: white;
+  padding: 20px;
+  border-radius: 16px;
+  border: 1px solid #d7dee9;
+}
+
+.last-emp-box {
+  background: #fff;
+  border-radius: 16px;
+  border: 1px solid #ddd;
+  padding: 20px;
+  font-size: 18px;
+}
+
+.admin-actions {
+  margin-top: 30px;
+  display: flex;
+  gap: 12px;
+}
+
+.admin-actions button {
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: #2961ff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  transition: .3s;
+}
+
+.admin-actions button:hover {
+  background: #1e47c8;
+}

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>إدارة التاسكات | Task Management</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="global.css">
+ <link rel="stylesheet" href="taskem.css">
+ <link rel="stylesheet" href="sidebar.css">
+
+
+</head>
+
+<body>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+
+  <!-- Sidebar -->
+  <div id="sidebar"></div>
+  <script src="sidebar.js"></script>
+
+  <!-- ===== رسالة عدم التخويل ===== -->
+  <div id="unauthorizedBox" class="unauthorized-box">
+    <h2>🚫 غير مخوّل للدخول</h2>
+    <p>
+      أنت غير مخوّل للوصول إلى هذه الصفحة<br>
+      يرجى التواصل مع مدير النظام
+    </p>
+  </div>
+
+  <!-- ===== محتوى الصفحة (Admin فقط) ===== -->
+  <main id="taskPageContent" class="task-page">
+
+    <!-- Navbar -->
+    <div class="top-nav">
+      <div class="nav-left">
+        <h1>Task Management</h1>
+        <p class="nav-sub">إنشاء ومتابعة أداء الموظفين</p>
+      </div>
+
+      <div class="nav-center">
+        <h2 class="kb-title">Employee Performance</h2>
+      </div>
+
+      <div class="nav-right">
+        <div class="task-actions">
+          <button id="openCreateBtn" class="btn-primary">➕ إنشاء تاسك</button>
+          <button id="openReportBtn" class="btn-ghost">📊 تقرير</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== لوحة التاسكات ===== -->
+    <section class="board">
+      <div class="board-head">
+        <h2 class="section-title2">التاسكات الحالية</h2>
+      </div>
+
+      <div class="columns">
+        <div class="column">
+          <div class="column-header">
+            <span class="col-title">In Progress / Failed</span>
+            <span class="col-count" id="countInProgress">0</span>
+          </div>
+          <div id="colInProgress" class="column-body"></div>
+        </div>
+
+        <div class="column">
+          <div class="column-header">
+            <span class="col-title">Done</span>
+            <span class="col-count" id="countDone">0</span>
+          </div>
+          <div id="colDone" class="column-body"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =========================
+       Modal: Create Task
+  ========================== -->
+  <div id="createOverlay" class="m-overlay">
+    <div class="m-box">
+      <div class="m-head">
+        <div>
+          <h2 class="m-title">إنشاء تاسك جديد</h2>
+          <p class="m-sub">أدخل بيانات KPI للموظف</p>
+        </div>
+        <button class="m-x" id="createCloseX">✕</button>
+      </div>
+
+      <div class="m-body">
+        <div class="form-grid">
+         a
+          <div class="form-group">
+            <label>اسم الموظف</label>
+            <input type="text" id="cEmpName" placeholder="مثال: Jawad">
+          </div>
+
+          <div class="form-group">
+            <label>Employee ID</label>
+            <input type="text" id="cEmpId" placeholder="مثال: 1001">
+          </div>
+
+          <div class="form-group">
+            <label>اسم المؤشر (KPI)</label>
+            <input type="text" id="cTaskName" placeholder="مثال: Tickets Resolved">
+          </div>
+
+          <div class="form-group">
+            <label>القيمة المستهدفة</label>
+            <input type="number" id="cTargetValue" min="1" placeholder="مثال: 100">
+          </div>
+
+          <div class="form-group">
+            <label>القيمة الحالية</label>
+            <input type="number" id="cCurrentValue" min="0" placeholder="مثال: 20">
+          </div>
+
+          <div class="form-group">
+            <label>الموعد النهائي</label>
+            <input type="datetime-local" id="cDeadline">
+          </div>
+
+          <div class="form-group">
+            <label>نسبة الإنجاز</label>
+            <input type="number" id="cProgressValue" readonly>
+          </div>
+        </div>
+
+        <div class="progress-preview">
+          <div class="progress">
+            <div id="cProgressFill" class="progress-fill"></div>
+          </div>
+          <span id="cProgressLabel">0%</span>
+        </div>
+      </div>
+
+      <div class="m-foot">
+        <button id="createCancelBtn" class="btn-ghost">إلغاء</button>
+        <button id="createSaveBtn" class="btn-primary">إنشاء التاسك</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================
+       Modal: Update Task
+  ========================== -->
+  <div id="updateOverlay" class="m-overlay">
+    <div class="m-box">
+      <div class="m-head">
+        <div>
+          <h2 class="m-title">تحديث / تعديل التاسك</h2>
+          <p class="m-sub">تعديل القيم سيحدث النسبة والحالة تلقائياً</p>
+        </div>
+        <button class="m-x" id="updateCloseX">✕</button>
+      </div>
+
+      <div class="m-body">
+        <input type="hidden" id="uTaskId">
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label>اسم الموظف</label>
+            <input type="text" id="uEmpName">
+          </div>
+
+          <div class="form-group">
+            <label>Employee ID</label>
+            <input type="text" id="uEmpId">
+          </div>
+
+          <div class="form-group">
+            <label>اسم المؤشر (KPI)</label>
+            <input type="text" id="uTaskName">
+          </div>
+
+          <div class="form-group">
+            <label>القيمة المستهدفة</label>
+            <input type="number" id="uTargetValue" min="1">
+          </div>
+
+          <div class="form-group">
+            <label>القيمة الحالية</label>
+            <input type="number" id="uCurrentValue" min="0">
+          </div>
+
+          <div class="form-group">
+            <label>الموعد النهائي</label>
+            <input type="datetime-local" id="uDeadline">
+          </div>
+
+          <div class="form-group">
+            <label>نسبة الإنجاز</label>
+            <input type="number" id="uProgressValue" readonly>
+          </div>
+        </div>
+
+        <div class="progress-preview">
+          <div class="progress">
+            <div id="uProgressFill" class="progress-fill"></div>
+          </div>
+          <span id="uProgressLabel">0%</span>
+        </div>
+      </div>
+
+      <div class="m-foot">
+        <button id="updateCancelBtn" class="btn-ghost">إلغاء</button>
+        <button id="updateSaveBtn" class="btn-primary">حفظ التعديل</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================
+       Modal: Confirm Delete
+  ========================== -->
+  <div id="confirmOverlay" class="m-overlay">
+    <div class="m-box m-small">
+      <div class="m-head">
+        <div>
+          <h2 class="m-title">تأكيد الحذف</h2>
+          <p class="m-sub">هل أنت متأكد من حذف هذا التاسك؟</p>
+        </div>
+        <button class="m-x" id="confirmCloseX">✕</button>
+      </div>
+
+      <div class="m-body">
+        <div class="confirm-info" id="confirmInfo"></div>
+        <input type="hidden" id="confirmTaskId">
+      </div>
+
+      <div class="m-foot">
+        <button id="confirmCancelBtn" class="btn-ghost">إلغاء</button>
+        <button id="confirmDeleteBtn" class="btn-danger">حذف</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================
+       Modal: Feedback / Status
+  ========================== -->
+  <div id="feedbackOverlay" class="fb-overlay">
+    <div class="fb-box" id="fbBox">
+      <h2 id="fbTitle" class="fb-title"></h2>
+      <p id="fbMessage" class="fb-message"></p>
+
+      <div class="fb-details">
+        <p>📌 المهمة: <strong id="fbTaskName"></strong></p>
+        <p>👤 الموظف: <strong id="fbEmpName"></strong></p>
+        <p>🆔 ID: <strong id="fbEmpId"></strong></p>
+        <p>📊 الإنجاز: <strong id="fbPercent"></strong>%</p>
+        <p>⏰ الموعد: <strong id="fbDeadline"></strong></p>
+      </div>
+
+      <button id="fbCloseBtn" class="fb-close-btn">إغلاق</button>
+    </div>
+  </div>
+
+  <!-- =========================
+       Modal: Report
+  ========================== -->
+  <div id="reportOverlay" class="m-overlay">
+    <div class="m-box">
+      <div class="m-head">
+        <div>
+          <h2 class="m-title">📊 تقرير الموظف</h2>
+          <p class="m-sub">ابحث بالاسم أو بالـ ID للحصول على ملخص الإنجاز</p>
+        </div>
+        <button class="m-x" id="reportCloseX">✕</button>
+      </div>
+
+      <div class="m-body">
+        <div class="report-grid">
+          <div class="form-group">
+            <label>اسم الموظف</label>
+            <input type="text" id="rEmpName" placeholder="مثال: Jawad">
+          </div>
+          <div class="form-group">
+            <label>Employee ID</label>
+            <input type="text" id="rEmpId" placeholder="مثال: 1001">
+          </div>
+         <div class="report-actions">
+  <button id="runReportBtn" class="btn-primary">عرض التقرير</button>
+  <button id="exportExcelBtn" class="btn-primary">📥 تنزيل Excel</button>
+  <button id="clearReportBtn" class="btn-ghost">مسح</button>
+</div>
+
+        </div>
+
+        <div id="reportResult" class="report-result">
+          <div class="report-empty">اختر موظف لعرض التقرير</div>
+        </div>
+      </div>
+
+      <div class="m-foot">
+        <button id="reportCloseBtn" class="btn-ghost">إغلاق</button>
+      </div>
+    </div>
+  </div>
+<footer class="footer">
+  <p>Developed by <strong>Jawad Kadhim. ALL RIGHTS RESERVED.</strong> © 2025</p>
+</footer>
+<script type="module" src="taskem.js"></script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>مقال البطاقة</title>
+
+<link rel="stylesheet" href="global.css">
+<link rel="stylesheet" href="sidebar.css">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<script src="https://cdn.ckeditor.com/ckeditor5/40.2.0/classic/ckeditor.js"></script>
+
+<style>
+body { background:#eef3f9; font-family:"Cairo",sans-serif; }
+.article-container{
+  margin-left:260px;margin-top:100px;
+  background:white;padding:30px;
+  border-radius:20px;width:75%;
+}
+.actions{margin-top:20px;display:flex;gap:10px}
+.save-btn{background:#4b6fff;color:white}
+.delete-btn{background:#ff4b4b;color:white}
+button{
+  padding:10px 22px;border-radius:12px;
+  border:none;cursor:pointer;font-size:14px
+}
+</style>
+</head>
+
+<body>
+
+<div id="sidebar"></div>
+<script src="sidebar.js"></script>
+
+<div class="top-nav">
+  <div class="nav-left"><h1>مقال البطاقة</h1></div>
+</div>
+
+<div class="article-container">
+  <h2 id="cardTitle">—</h2>
+  <p id="cardDesc">—</p>
+
+  <div id="editor"></div>
+
+  <div class="actions">
+    <button class="save-btn" onclick="saveArticle()">حفظ</button>
+    <button class="delete-btn" onclick="deleteArticle()">حذف</button>
+  </div>
+</div>
+
+<script type="module">
+import { db } from "./firebase.js";
+import { doc, getDoc, updateDoc } 
+from "https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore.js";
+
+const shelfId = localStorage.getItem("selectedShelfId");
+const cardId  = localStorage.getItem("selectedCardId");
+
+if(!shelfId || !cardId){
+  alert("لم يتم تحديد البطاقة");
+  location.href="shelves.html";
+}
+
+const ref = doc(db,"shelves",shelfId,"cards",cardId);
+let editorInstance;
+
+ClassicEditor.create(document.querySelector('#editor'))
+.then(async editor=>{
+  editorInstance=editor;
+  const snap=await getDoc(ref);
+  if(snap.exists()){
+    document.getElementById("cardTitle").innerText=snap.data().title;
+    document.getElementById("cardDesc").innerText=snap.data().desc||"";
+    editor.setData(snap.data().articleHtml||"");
+  }
+});
+
+window.saveArticle=async()=>{
+  await updateDoc(ref,{ articleHtml: editorInstance.getData() });
+  alert("تم حفظ المقال ✅");
+}
+
+window.deleteArticle=async()=>{
+  if(!confirm("حذف المقال؟"))return;
+  await updateDoc(ref,{ articleHtml:"" });
+  editorInstance.setData("");
+}
+</script>
+
+</body>
+</html>

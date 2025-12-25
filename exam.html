@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>امتحان الموظف</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="exam.css" />
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="title">
+    <h1 id="examTitle">امتحان</h1>
+    <p id="examDesc">تحميل الامتحان...</p>
+  </div>
+  <div class="meta">
+    <div class="pill">⏱️ الوقت: <b id="timer">--:--</b></div>
+    <div class="pill">⭐ النقاط: <b id="pointsBox">0</b></div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- Employee Info -->
+  <div class="card">
+    <h3 class="card-title">معلومات الموظف</h3>
+
+    <div class="grid">
+      <div class="field">
+        <label>الاسم</label>
+        <input id="empName" placeholder="اكتب اسمك..." />
+      </div>
+      <div class="field">
+        <label>الرقم الوظيفي</label>
+        <input id="empId" placeholder="ID Number..." />
+      </div>
+      <div class="field">
+        <label>القسم</label>
+        <select id="empSection">
+          <option value="Inbound">Inbound</option>
+          <option value="Outbound">Outbound</option>
+          <option value="NOVIP">NOVIP</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>الإيميل (اختياري)</label>
+        <input id="empEmail" placeholder="name@earthlink.iq" />
+      </div>
+    </div>
+
+    <div class="row">
+      <button class="btn primary" id="btnStart">بدء الامتحان</button>
+      <span class="hint" id="startHint"></span>
+    </div>
+  </div>
+
+  <!-- Questions -->
+  <div class="card" id="examCard" style="display:none;">
+    <h3 class="card-title">الأسئلة</h3>
+    <div id="questionsBox"></div>
+
+    <div class="row end-row">
+      <button class="btn success" id="btnSubmit">إرسال الامتحان</button>
+      <span class="hint" id="saveHint"></span>
+    </div>
+  </div>
+
+</div>
+
+<!-- Finish Overlay -->
+<div id="finishOverlay" class="finish-overlay">
+  <div class="finish-card">
+    <div class="checkmark">✔</div>
+    <h3>تم إرسال الامتحان</h3>
+    <p>شكرًا لك. سيتم تحويلك خلال لحظات…</p>
+  </div>
+</div>
+
+<script type="module" src="exam.js"></script>
+</body>
+</html>

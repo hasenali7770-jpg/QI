@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <title>تقرير الامتحان</title>
+
+  <style>
+    body {
+      font-family: "Cairo", sans-serif;
+      padding: 30px;
+      background: #f8fafc;
+    }
+
+    .report-box {
+      background: #ffffff;
+      padding: 25px;
+      border-radius: 18px;
+      border: 1px solid #d1d5db;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    h1, h2, h3 {
+      margin: 0 0 10px;
+    }
+
+    .section {
+      margin-top: 22px;
+    }
+
+    .answer-block {
+      background: #f1f5f9;
+      padding: 12px 15px;
+      border-radius: 12px;
+      margin-bottom: 12px;
+      border-right: 4px solid #3b82f6;
+    }
+
+    .correct {
+      color: #16a34a;
+    }
+
+    .wrong {
+      color: #dc2626;
+    }
+
+    .manual-score {
+      margin-top: 4px;
+      font-size: 14px;
+      color: #0f172a;
+      font-weight: bold;
+    }
+
+    .print-btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #3b82f6;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="report" class="report-box">
+    <h1>📄 تقرير الامتحان</h1>
+    <p id="employeeInfo"></p>
+    <hr>
+
+    <div class="section">
+      <h2>النتيجة:</h2>
+      <p id="scoreInfo"></p>
+    </div>
+
+    <div class="section">
+      <h2>تفاصيل الإجابات:</h2>
+      <div id="answersBox"></div>
+    </div>
+
+    <button onclick="window.print()" class="print-btn">🖨 طباعة / حفظ PDF</button>
+  </div>
+
+  <script src="pdf_export.js"></script>
+</body>
+
+</html>

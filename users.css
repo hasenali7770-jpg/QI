@@ -1,0 +1,212 @@
+body {
+  font-family: "Cairo", sans-serif;
+  background: #eef2f7;
+}
+
+.users-container {
+  margin-left: 260px;
+  padding: 30px;
+}
+
+.users-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background: white;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.users-table th {
+  background: #00c2a8;
+  color: white;
+  padding: 12px;
+  text-align: center;
+}
+
+.users-table td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+  text-align: center;
+}
+
+.btn-edit {
+  background: #0038a8;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+}
+
+.btn-delete {
+  background: #00c2a8;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+}
+
+.status-active {
+  color: #00c2a8;
+  font-weight: bold;
+}
+.status-pending {
+  color: #f59e0b;
+  font-weight: bold;
+}
+.status-disabled {
+  color: #ef4444;
+  font-weight: bold;
+}
+
+/* Popup */
+/* =====================
+   Popup Modern Glass 
+=====================*/
+
+.popup-overlay {
+  position: fixed;
+  top: 0; 
+  left: 0;
+  width: 100%; 
+  height: 100%;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(4px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.3s ease;
+  z-index: 999;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.popup {
+  width: 400px;
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(18px);
+  padding: 30px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.25);
+  box-shadow: 0 10px 35px rgba(0,0,0,0.15);
+  animation: popUp 0.3s ease;
+  text-align: center;
+}
+
+@keyframes popUp {
+  from { opacity: 0; transform: scale(0.8); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.popup h3 {
+  font-size: 22px;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.popup label {
+  display: block;
+  font-size: 15px;
+  color: #fff;
+  margin-bottom: 6px;
+  text-align: right;
+}
+
+.popup select {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 18px;
+  border-radius: 10px;
+  border: none;
+  background: rgba(255,255,255,0.85);
+  font-size: 15px;
+  outline: none;
+}
+
+.popup-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+/* زر الحفظ */
+.btn-save {
+  background: #00c2a8;
+  color: #fff;
+  padding: 12px 26px;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.25s;
+}
+.btn-save:hover {
+  background: #00c2a8;
+  transform: translateY(-2px);
+}
+
+/* زر الإلغاء */
+.btn-cancel {
+  background: #00c2a8;
+  color: #fff;
+  padding: 12px 26px;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.25s;
+}
+.btn-cancel:hover {
+  background: #dc2626;
+  transform: translateY(-2px);
+}
+/* =====================
+   Unauthorized Mask
+===================== */
+
+.users-mask {
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.65);
+  backdrop-filter: blur(6px);
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mask-box {
+  background: rgba(0,0,0,0.75);
+  color: white;
+  padding: 22px 28px;
+  border-radius: 14px;
+  text-align: center;
+  font-size: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+}
+
+.mask-box h4 {
+  margin-bottom: 8px;
+  font-size: 18px;
+}
+
+.blurred td {
+  filter: blur(5px);
+  user-select: none;
+}
+.footer {
+  text-align: center;
+  padding: 18px 0;
+  font-size: 14px;
+  color: #777;
+  margin-top: 40px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.footer strong {
+  color: #4b6fff;
+  font-weight: 700;
+}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>TR REPORT</title>
+
+<link rel="stylesheet" href="sidebar.css">
+<link rel="stylesheet" href="tr_report.css">
+</head>
+<body>
+
+<div id="sidebar"></div>
+<script src="sidebar.js"></script>
+
+<div class="page">
+
+  <!-- Header -->
+  <div class="header">
+
+    <!-- زر رجوع -->
+    <button class="back-btn" onclick="history.back()">⬅ رجوع</button>
+
+    <h1>TR REPORT</h1>
+
+    <div class="actions">
+      <button id="openReport">📊 تقرير</button>
+    </div>
+
+  </div>
+
+  <!-- عرض الموظفين -->
+  <div id="list" class="grid"></div>
+
+</div>
+
+<!-- نافذة التقرير -->
+<div id="reportModal" class="modal hidden">
+  <div class="modal-card">
+
+    <!-- زر إغلاق -->
+    <button class="close-x" id="closeReportX">✖</button>
+
+    <h2>تقرير الموظفين</h2>
+
+    <select id="rDep">
+      <option value="">اختر القسم</option>
+      <option value="INBOUND">INBOUND</option>
+      <option value="NONIP">NONIP</option>
+      <option value="OUTBOUND">OUTBOUND</option>
+      <option value="SALES">SALES</option>
+    </select>
+
+    <input type="month" id="rMonth">
+
+    <div class="modal-actions">
+      <button id="runReport">تشغيل التقرير</button>
+      <button id="closeReport" class="secondary">إغلاق</button>
+    </div>
+
+    <div id="reportResult" class="result"></div>
+
+  </div>
+</div>
+
+<script type="module" src="tr_report.js"></script>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>تحرير الخبر</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Global Style -->
+  <link rel="stylesheet" href="global.css">
+<link rel="stylesheet" href="sidebar.css">
+
+  <!-- CKEditor -->
+  <script src="https://cdn.ckeditor.com/ckeditor5/40.2.0/classic/ckeditor.js"></script>
+
+  <style>
+    body {
+      background:#eef3f9;
+      font-family:"Cairo",sans-serif;
+    }
+
+    .editor-container {
+      margin-left:260px;
+      margin-top:100px;
+      background:#fff;
+      padding:30px;
+      border-radius:20px;
+      width:75%;
+    }
+
+    .editor-container h2 {
+      margin-bottom:6px;
+    }
+
+    .editor-container .desc {
+      color:#666;
+      margin-bottom:20px;
+    }
+
+    .actions {
+      margin-top:20px;
+      display:flex;
+      gap:10px;
+    }
+
+    .save-btn {
+      background:#4b6fff;
+      color:white;
+      padding:10px 22px;
+      border-radius:12px;
+      border:none;
+      cursor:pointer;
+    }
+
+    .delete-btn {
+      background:#ff4b4b;
+      color:white;
+      padding:10px 22px;
+      border-radius:12px;
+      border:none;
+      cursor:pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- Sidebar -->
+<div id="sidebar"></div>
+<script src="sidebar.js"></script>
+
+<!-- Navbar -->
+<div class="top-nav">
+  <div class="nav-left">
+    <h1>تحرير الخبر</h1>
+  </div>
+</div>
+
+<!-- Editor -->
+<div class="editor-container">
+  <h2 id="newsTitle">—</h2>
+  <p id="newsDesc" class="desc">—</p>
+
+  <div id="editor"></div>
+
+  <div class="actions">
+    <button class="save-btn" onclick="saveArticle()">حفظ</button>
+    <button class="delete-btn" onclick="deleteArticle()">حذف</button>
+  </div>
+</div>
+
+<script type="module">
+import { db } from "./firebase.js";
+import {
+  doc,
+  getDoc,
+  updateDoc
+} from "https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore.js";
+
+// ===============================
+// Get selected news
+// ===============================
+const newsId = localStorage.getItem("selectedNewsId");
+
+if (!newsId) {
+  alert("لم يتم تحديد الخبر");
+  location.href = "news.html";
+}
+
+const ref = doc(db, "news", newsId);
+
+// ===============================
+// CKEditor Init
+// ===============================
+let editorInstance;
+
+ClassicEditor.create(document.querySelector("#editor"))
+  .then(async editor => {
+    editorInstance = editor;
+
+    const snap = await getDoc(ref);
+    if (snap.exists()) {
+      const data = snap.data();
+      document.getElementById("newsTitle").innerText = data.title || "—";
+      document.getElementById("newsDesc").innerText  = data.desc  || "—";
+      editor.setData(data.content || "");
+    }
+  });
+
+// ===============================
+// Save
+// ===============================
+window.saveArticle = async () => {
+  await updateDoc(ref, {
+    content: editorInstance.getData()
+  });
+  alert("✅ تم حفظ الخبر");
+};
+
+// ===============================
+// Delete
+// ===============================
+window.deleteArticle = async () => {
+  if (!confirm("حذف محتوى الخبر؟")) return;
+
+  await updateDoc(ref, {
+    content: ""
+  });
+
+  editorInstance.setData("");
+};
+</script>
+
+</body>
+</html>

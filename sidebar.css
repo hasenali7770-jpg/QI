@@ -1,0 +1,96 @@
+.sidebar {
+  width: 260px;
+  height: 100vh;
+  background: linear-gradient(135deg, #0038a8, #00c2a8);
+  padding: 20px 15px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  color: white;
+  overflow-y: auto;
+}
+
+.side-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+/* Section */
+.section {
+  margin-bottom: 12px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.section-header:hover {
+  background: rgba(255,255,255,0.15);
+}
+
+.section-header .arrow {
+  transition: transform 0.35s ease;
+  font-size: 13px;
+}
+
+.section.open .arrow {
+  transform: rotate(90deg);
+}
+
+.section-header .title {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Body */
+.section-body {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  padding-left: 8px;
+  transition: max-height 0.45s ease, opacity 0.3s ease;
+}
+
+.section.open .section-body {
+  max-height: 500px;
+  opacity: 1;
+}
+
+/* Items */
+.item {
+  position: relative;
+  padding: 10px 15px 10px 40px;
+  margin: 6px 0;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: 0.3s;
+}
+
+.item:hover {
+  background: rgba(255,255,255,0.12);
+  transform: translateX(6px);
+}
+
+.item.active {
+  background: rgba(255,255,255,0.22);
+}
+
+/* Dot */
+.item .dot {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  background: white;
+  border-radius: 50%;
+  transform: translateY(-50%);
+}

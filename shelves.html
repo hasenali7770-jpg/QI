@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>الرفوف</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="global.css">
+  <link rel="stylesheet" href="shelves.css">
+  <link rel="stylesheet" href="sidebar.css">
+
+</head>
+
+<body>
+
+  <!-- Sidebar -->
+  <div id="sidebar"></div>
+  <script src="sidebar.js"></script>
+
+  <!-- Navbar -->
+  <div class="top-nav">
+    <div class="nav-left">
+      <h1>الرفوف</h1>
+      <p class="nav-sub">إدارة الرفوف والمحتوى</p>
+    </div>
+
+    <div class="nav-center">
+      <h2 class="kb-title">Customer Care Knowledge Base</h2>
+    </div>
+  </div>
+
+  <!-- Search -->
+  <div class="shelves-search-area">
+    <input type="text" class="shelves-search" placeholder="ابحث عن رف..." />
+  </div>
+
+  <!-- Add shelf button -->
+  <div class="add-shelf-area">
+    <button id="addShelfBtn" class="add-btn" onclick="openAddShelf()">+ إضافة رف</button>
+  </div>
+
+  <!-- Shelves Grid -->
+  <main class="shelves-content">
+    <div class="shelves-grid" id="shelvesGrid"></div>
+  </main>
+
+  <!-- Popup Add Shelf -->
+  <div class="popup-overlay" id="popupAdd">
+    <div class="popup-box">
+      <h2 class="popup-title">إضافة رف جديد</h2>
+
+      <input type="text" id="popupTitle" placeholder="اسم الرف..." class="popup-input">
+      <textarea id="popupDesc" class="popup-textarea" placeholder="وصف مختصر..."></textarea>
+
+      <label class="upload-box">
+        <input type="file" id="popupImage" accept="image/*">
+        اختر صورة أو اسحبها هنا
+      </label>
+
+      <div class="popup-btns">
+        <button class="btn confirm" onclick="confirmAdd()">إضافة</button>
+        <button class="btn cancel" onclick="closePopup()">إلغاء</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Popup Edit Shelf -->
+  <div class="popup-overlay" id="popupEdit">
+    <div class="popup-box">
+      <h2 class="popup-title">تعديل الرف</h2>
+
+      <input type="text" id="editTitle" class="popup-input" placeholder="اسم الرف...">
+      <textarea id="editDesc" class="popup-textarea" placeholder="وصف مختصر..."></textarea>
+
+      <label class="upload-box">
+        <input type="file" id="editImage" accept="image/*">
+        تعديل الصورة (اختياري)
+      </label>
+
+      <div class="popup-btns">
+        <button class="btn confirm" onclick="saveEdit()">حفظ التعديل</button>
+        <button class="btn cancel" onclick="closeEditPopup()">إلغاء</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ✅ مهم جداً: لازم Module -->
+  <script type="module" src="shelves.js"></script>
+  <footer class="footer">
+  <p>Developed by <strong>Jawad Kadhim. ALL RIGHTS RESERVED.</strong> © 2025</p>
+</footer>
+</body>
+</html>

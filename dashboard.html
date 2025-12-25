@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="sidebar.css">
+  <link rel="stylesheet" href="dashboard.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<!-- Sidebar -->
+<div id="sidebar"></div>
+<script src="sidebar.js"></script>
+
+<!-- Content -->
+<div class="page dashboard-page">
+
+  <!-- Header -->
+  <div class="dash-header">
+    <h1>Dashboard</h1>
+    <p>نظرة عامة على النظام</p>
+  </div>
+
+  <!-- ================= Cards ================= -->
+  <div class="cards">
+
+    <div class="card" onclick="location.href='users.html'">
+      <div class="icon">👤</div>
+      <div>
+        <div class="label">عدد المستخدمين</div>
+        <div class="number" id="usersCount">0</div>
+      </div>
+    </div>
+
+    <div class="card" onclick="location.href='shelves.html'">
+      <div class="icon">🗂</div>
+      <div>
+        <div class="label">عدد الرفوف</div>
+        <div class="number" id="shelvesCount">0</div>
+      </div>
+    </div>
+
+    <div class="card" onclick="location.href='news.html'">
+      <div class="icon">📰</div>
+      <div>
+        <div class="label">عدد الأخبار</div>
+        <div class="number" id="newsCount">0</div>
+      </div>
+    </div>
+
+    <div class="card" onclick="location.href='kpi_productivity.html'">
+      <div class="icon">📊</div>
+      <div>
+        <div class="label">مؤشرات الأداء KPI</div>
+        <div class="number" id="kpiCount">0</div>
+      </div>
+    </div>
+
+    <!-- ✅ Exam Attempts Card -->
+    <div class="card" onclick="location.href='exam.html'">
+      <div class="icon">📝</div>
+      <div>
+        <div class="label">الموظفون الذين أدّوا الامتحان</div>
+        <div class="number" id="examUsersCount">0</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ================= Charts ================= -->
+  <div class="charts-grid">
+
+    <div class="chart-card">
+      <h3>عدد المستخدمين</h3>
+      <canvas id="usersChart"></canvas>
+    </div>
+
+    <div class="chart-card">
+      <h3>عدد الرفوف</h3>
+      <canvas id="shelvesChart"></canvas>
+    </div>
+
+    <div class="chart-card">
+      <h3>عدد الكتب</h3>
+      <canvas id="booksChart"></canvas>
+    </div>
+
+    <div class="chart-card">
+      <h3>تطور مؤشرات الأداء KPI</h3>
+      <canvas id="kpiChart"></canvas>
+    </div>
+
+    <!-- ✅ Exam Attempts Monthly Chart -->
+    <div class="chart-card">
+      <h3>الموظفون الذين أدّوا الامتحان (شهري)</h3>
+      <canvas id="examUsersChart"></canvas>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- JS -->
+<script type="module" src="dashboard.js"></script>
+</body>
+</html>

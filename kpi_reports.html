@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>KPI Reports</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="kpi_reports.css">
+</head>
+
+<body>
+
+<!-- Header -->
+<div class="header">
+  <button class="back-btn" onclick="history.back()">←</button>
+  <h1>📊 KPI Reports (Local)</h1>
+</div>
+
+<!-- Content -->
+<div class="content">
+  <table class="reports-table">
+    <thead>
+      <tr>
+        <th>KPI Name</th>
+        <th>Month</th>
+        <th>Created By</th>
+        <th>Date</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="reportsBody"></tbody>
+  </table>
+
+  <div id="emptyState" class="empty" style="display:none">
+    No KPI reports saved yet.
+  </div>
+</div>
+<footer class="footer">
+  <p>Developed by <strong>Jawad Kadhim. ALL RIGHTS RESERVED.</strong> © 2025</p>
+</footer>
+<script src="kpi_reports.js"></script>
+</body>
+</html>

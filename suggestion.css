@@ -1,0 +1,79 @@
+/* ===== الصفحة كاملة ===== */
+body {
+  background: #f1f5fb;
+  font-family: "Cairo", sans-serif;
+}
+
+/* ===== المساحة التي تحتوي على الفورم ===== */
+.content-area {
+  margin-right: 260px; /* لأن السايدبار عرضه 260px */
+  padding: 120px 40px;
+  display: flex;
+  justify-content: flex-e; /* يسحب الفورم لليمين */
+}
+
+/* ===== صندوق الفورم ===== */
+.suggestion-box {
+  width: 55%;          /* 🔥 عرض مثالي بدون خروج */
+  max-width: 750px;    /* يمنع الفورم من التمدد أكثر من اللازم */
+  background: #fff;
+  padding: 35px 40px;
+  border-radius: 18px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+}
+
+.suggestion-box h2 {
+  font-size: 24px;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+/* ===== حقول الإدخال ===== */
+.form-input {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid #d7dce4;
+  background: #f7f9fc;
+  font-size: 15px;
+  margin-bottom: 18px;
+  outline: none;
+}
+
+.form-input:focus {
+  border-color: #0038a8;
+  background: #ffffff;
+}
+
+/* ===== زر الإرسال ===== */
+.send-btn {
+  background: #0038a8;
+  color: white;
+  border: none;
+  padding: 13px 30px;
+  border-radius: 12px;
+  font-size: 16px;
+  cursor: pointer;
+  display: block;
+  margin-left: auto; /* يجعل الزر يلتصق باليمين */
+  transition: 0.25s;
+}
+
+.send-btn:hover {
+  background: #264dff;
+  transform: translateY(-2px);
+}
+.footer {
+  text-align: center;
+  padding: 18px 0;
+  font-size: 14px;
+  color: #777;
+  margin-top: 40px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.footer strong {
+  color: #4b6fff;
+  font-weight: 700;
+}

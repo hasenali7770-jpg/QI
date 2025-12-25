@@ -1,0 +1,107 @@
+/* Search */
+.notif-search-area {
+  margin-left: 260px;
+  margin-top: 95px;
+  padding: 0 40px;
+}
+
+.notif-search {
+  width: 50%;
+  padding: 14px 18px;
+  border-radius: 50px;
+  border: 1px solid #d1d5db;
+  background: white;
+  font-size: 15px;
+  outline: none;
+}
+
+/* Content */
+.notif-content {
+  margin-left: 260px;
+  margin-top: 30px;
+  padding: 0 40px 80px;
+}
+
+.notif-grid {
+  display: grid;
+  grid-template-columns: 2.2fr 1fr;
+  gap: 30px;
+}
+
+/* Titles */
+.section-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.section-sub {
+  font-size: 13px;
+  opacity: 0.7;
+  margin-bottom: 20px;
+}
+
+/* Notification Boxes */
+.notif-box {
+  background: white;
+  padding: 18px 22px;
+  border-radius: 18px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  margin-bottom: 18px;
+  border: 1px solid #e4e8ef;
+}
+
+.notif-icon {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  margin-top: 5px;
+}
+
+/* Colors */
+.blue { background: #6ea0ff; }
+.red { background: #ff7066; }
+.green { background: #37d67a; }
+
+.notif-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.notif-desc {
+  font-size: 13px;
+  color: #666;
+}
+
+/* Right Column */
+.notif-right {
+  background: white;
+  padding: 25px;
+  border-radius: 18px;
+  border: 1px solid #e4e8ef;
+}
+
+.activity-list {
+  margin-top: 15px;
+  list-style: none;
+  padding-right: 0;
+}
+
+.activity-list li {
+  margin-bottom: 12px;
+  font-size: 14px;
+  position: relative;
+  padding-right: 15px;
+}
+
+.activity-list li::before {
+  content: "•";
+  position: absolute;
+  right: 0;
+  font-size: 20px;
+  line-height: 14px;
+  color: #4b6fff;
+}

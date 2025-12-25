@@ -1,0 +1,54 @@
+* {
+  box-sizing: border-box;
+  font-family: "Cairo", sans-serif;
+}
+
+body {
+  margin: 0;
+  background: #eef3f9;
+  padding: 30px;
+}
+
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: white;
+  border-radius: 20px;
+  padding: 25px;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0,0,0,.05);
+  transition: transform .3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.dot {
+  width: 18px;
+  height: 18px;
+  background: #4f7cff;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.label {
+  font-size: 15px;
+  color: #444;
+  margin-bottom: 12px;
+}
+
+.value {
+  font-size: 34px;
+  font-weight: 700;
+  color: #4f7cff;
+}
+
+.value.small {
+  font-size: 20px;
+  color: #222;
+}

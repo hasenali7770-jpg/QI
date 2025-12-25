@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>TR</title>
+
+<link rel="stylesheet" href="sidebar.css">
+<link rel="stylesheet" href="tr.css">
+</head>
+<body>
+
+<div id="sidebar"></div>
+<script src="sidebar.js"></script>
+
+<div class="page">
+  <div class="header">
+    <h1>TR – الموظفين</h1>
+    <button id="openForm">➕ إضافة موظف</button>
+  </div>
+
+  <div id="formCard" class="card hidden">
+    <div class="grid">
+      <input id="empId" placeholder="ID">
+      <input id="name" placeholder="Name">
+      <input id="ph" placeholder="Phone">
+      <input type="date" id="date">
+      <select id="status">
+        <option value="">الحالة</option>
+        <option value="Active">Active</option>
+        <option value="Inactive">Inactive</option>
+      </select>
+<select id="dep">
+  <option value="">القسم (اختياري)</option>
+  <option value="INBOUND">INBOUND</option>
+  <option value="NONIP">NONIP</option>
+  <option value="OUTBOUND">OUTBOUND</option>
+  <option value="SALES">SALES</option>
+</select>
+    </div>
+
+    <button id="saveBtn">💾 حفظ</button>
+  </div>
+</div>
+
+<script type="module" src="tr.js"></script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>نتيجة الامتحان</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="exam_result.css">
+</head>
+<body>
+
+<div class="top-bar">
+  <h1>نتيجة الامتحان</h1>
+  <p>أدخل معلوماتك لعرض النتيجة</p>
+</div>
+
+<div class="container">
+
+  <!-- Search -->
+  <div class="card">
+    <div class="grid">
+      <div class="field">
+        <label>الاسم</label>
+        <input id="empName" placeholder="اسم الموظف">
+      </div>
+      <div class="field">
+  <label>القسم</label>
+  <select id="empSection">
+    <option value="">— اختر القسم —</option>
+    <option value="Inbound">Inbound</option>
+    <option value="Outbound">Outbound</option>
+    <option value="NOVIP">NOVIP</option>
+  </select>
+</div>
+
+      <div class="field">
+        <label>الرقم الوظيفي</label>
+        <input id="empId" placeholder="Employee ID">
+      </div>
+    </div>
+
+    <button class="btn primary" id="btnSearch">عرض النتيجة</button>
+    <p class="hint" id="hint"></p>
+  </div>
+
+  <!-- Result -->
+  <div id="resultBox" style="display:none">
+
+    <div class="card">
+      <h3>معلومات الموظف</h3>
+      <div id="infoBox"></div>
+    </div>
+
+    <div class="card">
+      <h3>النتيجة</h3>
+      <div class="result">
+        <span>الدرجة النهائية:</span>
+        <b id="totalScore">0</b> / 100
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>الأسئلة والإجابات</h3>
+      <div id="questionsBox"></div>
+    </div>
+
+  </div>
+
+</div>
+
+<script type="module" src="exam_result.js"></script>
+<!-- No Result Popup -->
+<div id="noResultPopup" class="popup-overlay">
+  <div class="popup-card">
+    <div class="popup-icon">⚠️</div>
+    <h3>لا توجد نتيجة</h3>
+    <p>
+      لم يتم العثور على نتيجة لهذا الاسم أو الرقم الوظيفي.<br>
+      تأكد من:
+      <br>• أنك أديت الامتحان
+      <br>• أو أن الامتحان تم تصحيحه
+    </p>
+    <button class="btn primary" onclick="closeNoResult()">حسناً</button>
+  </div>
+</div>
+
+</body>
+</html>
