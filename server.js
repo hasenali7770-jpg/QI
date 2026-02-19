@@ -7,8 +7,12 @@ app.use(cors({ origin: "*" }));
 app.use(express.json());
 
 // ===================== إعدادات =====================
-const PORT = 3000; // ثابت مثل ما طلبت
-const JWT_SECRET = "CHANGE_ME_TO_A_LONG_RANDOM_SECRET";
+// Render يفرض PORT خاص به — لازم نستخدمه
+const PORT = process.env.PORT || 3000;
+
+// لا تكتب السر هنا. خليه من Render Environment Variables
+const JWT_SECRET = process.env.JWT_SECRET || "CHANGE_ME_TO_A_LONG_RANDOM_SECRET";
+
 const CODE_TTL_MS = 10 * 60 * 1000; // 10 دقائق
 const ALLOWED_DOMAIN = "@qicard.iq";
 
@@ -43,7 +47,7 @@ app.get("/health", (req, res) => {
   res.json({
     ok: true,
     name: "QiCard Auth API",
-    time: new Date().toISOString()
+    time: new Date().toISOString(),
   });
 });
 
@@ -58,7 +62,7 @@ app.post("/api/auth/send-code", (req, res) => {
   if (!email.endsWith(ALLOWED_DOMAIN)) {
     return res.status(403).json({
       success: false,
-      message: `يسمح فقط ببريد الشركة (${ALLOWED_DOMAIN})`
+      message: `يسمح فقط ببريد الشركة (${ALLOWED_DOMAIN})`,
     });
   }
 
@@ -69,7 +73,7 @@ app.post("/api/auth/send-code", (req, res) => {
     email,
     code,
     expiresAt: Date.now() + CODE_TTL_MS,
-    attempts: 0
+    attempts: 0,
   });
 
   // للعرض فقط (مثل Firebase Console)
@@ -77,7 +81,7 @@ app.post("/api/auth/send-code", (req, res) => {
 
   return res.json({
     success: true,
-    sessionId
+    sessionId,
   });
 });
 
@@ -114,16 +118,14 @@ app.post("/api/auth/verify-code", (req, res) => {
   // نجاح
   sessions.delete(sessionId);
 
-  const token = jwt.sign(
-    { email, app: "qicard-kb" },
-    JWT_SECRET,
-    { expiresIn: "12h" }
-  );
+  const token = jwt.sign({ email, app: "qicard-kb" }, JWT_SECRET, {
+    expiresIn: "12h",
+  });
 
   return res.json({ success: true, token });
 });
 
 // ===================== تشغيل السيرفر =====================
-app.listen(3000, "0.0.0.0", () => {
-  console.log("QiCard Auth API running on 0.0.0.0:3000");
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`QiCard Auth API running on 0.0.0.0:${PORT}`);
 });
