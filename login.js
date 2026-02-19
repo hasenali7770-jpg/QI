@@ -100,7 +100,7 @@ verifyBtn.addEventListener("click", async () => {
     setMsg("تم تسجيل الدخول بنجاح ✅", "success");
 
     setTimeout(() => {
-      window.location.href = "dashboard.html";
+      window.location.href = window.location.origin + "/QI/dashboard.html";
     }, 600);
   } catch (err) {
     setMsg("تعذر الاتصال بالسيرفر.", "error");
@@ -108,3 +108,4 @@ verifyBtn.addEventListener("click", async () => {
     verifyBtn.disabled = false;
   }
 });
+
