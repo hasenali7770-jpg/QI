@@ -1,5 +1,5 @@
 // ===== إعدادات السيرفر =====
-const API_BASE = "http://172.237.101.38:3000";
+const API_BASE = "https://qi-0odh.onrender.com";
 
 // عناصر الصفحة
 const emailInput = document.getElementById("emailInput");
@@ -121,3 +121,4 @@ verifyBtn.addEventListener("click", async () => {
     verifyBtn.disabled = false;
   }
 });
+
