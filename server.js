@@ -7,14 +7,12 @@ app.use(cors({ origin: "*" }));
 app.use(express.json());
 
 // ===================== إعدادات =====================
-// Render يفرض PORT خاص به — لازم نستخدمه
 const PORT = process.env.PORT || 3000;
-
-// لا تكتب السر هنا. خليه من Render Environment Variables
 const JWT_SECRET = process.env.JWT_SECRET || "CHANGE_ME_TO_A_LONG_RANDOM_SECRET";
-
 const CODE_TTL_MS = 10 * 60 * 1000; // 10 دقائق
-const ALLOWED_DOMAIN = "@qicard.iq";
+
+// ✅ يسمح بالدومينين (حل التعارض نهائياً)
+const ALLOWED_DOMAINS = ["@qi.iq", "@qicard.iq"];
 
 // تخزين مؤقت: sessionId -> { email, code, expiresAt, attempts }
 const sessions = new Map();
@@ -40,6 +38,10 @@ function normalizeEmail(email) {
   return String(email || "").trim().toLowerCase();
 }
 
+function isAllowedEmail(email) {
+  return ALLOWED_DOMAINS.some((d) => email.endsWith(d));
+}
+
 // ===================== Routes =====================
 
 // فحص السيرفر
@@ -59,10 +61,10 @@ app.post("/api/auth/send-code", (req, res) => {
     return res.status(400).json({ success: false, message: "البريد مطلوب" });
   }
 
-  if (!email.endsWith(ALLOWED_DOMAIN)) {
+  if (!isAllowedEmail(email)) {
     return res.status(403).json({
       success: false,
-      message: `يسمح فقط ببريد الشركة (${ALLOWED_DOMAIN})`,
+      message: `يسمح فقط ببريد الشركة (${ALLOWED_DOMAINS.join(" أو ")})`,
     });
   }
 
@@ -76,7 +78,7 @@ app.post("/api/auth/send-code", (req, res) => {
     attempts: 0,
   });
 
-  // للعرض فقط (مثل Firebase Console)
+  // للعرض فقط (من Render Logs)
   console.log(`[QiCard] Verification code for ${email}: ${code}`);
 
   return res.json({
@@ -115,7 +117,6 @@ app.post("/api/auth/verify-code", (req, res) => {
     return res.status(401).json({ success: false, message: "رمز غير صحيح" });
   }
 
-  // نجاح
   sessions.delete(sessionId);
 
   const token = jwt.sign({ email, app: "qicard-kb" }, JWT_SECRET, {
