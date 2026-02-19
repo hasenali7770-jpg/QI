@@ -29,12 +29,7 @@ sendCodeBtn.addEventListener("click", async () => {
     return setMsg("أدخل البريد الإلكتروني.", "error");
   }
 
-  // ✅ السماح فقط ببريد qi.iq
-  const allowedDomain = "@qi.iq";
-  if (!email.endsWith(allowedDomain)) {
-    return setMsg("يسمح فقط ببريد الشركة (@qi.iq)", "error");
-  }
-
+  // ✅ ملاحظة: فحص الدومين صار بالسيرفر فقط (أمان أعلى)
   sendCodeBtn.disabled = true;
   setMsg("جاري إرسال رمز التحقق...", "");
 
@@ -49,19 +44,16 @@ sendCodeBtn.addEventListener("click", async () => {
 
     if (!res.ok || !data.success) {
       setMsg(data.message || "فشل إرسال الرمز.", "error");
-      sendCodeBtn.disabled = false;
       return;
     }
 
-    // إظهار حقل الرمز
     codeBox.classList.remove("hidden");
-    setMsg("تم إرسال رمز التحقق ✅", "success");
+    setMsg("تم إرسال رمز التحقق ✅ (تحقق من Render Logs)", "success");
     codeInput.focus();
 
     if (data.sessionId) {
       localStorage.setItem("qicard_session_id", data.sessionId);
     }
-
   } catch (err) {
     setMsg("تعذر الاتصال بالسيرفر.", "error");
   } finally {
@@ -99,26 +91,20 @@ verifyBtn.addEventListener("click", async () => {
 
     if (!res.ok || !data.success) {
       setMsg(data.message || "رمز غير صحيح.", "error");
-      verifyBtn.disabled = false;
       return;
     }
 
-    // ✅ تسجيل الدخول
     localStorage.setItem("qicard_kb_logged_in", "1");
-    if (data.token) {
-      localStorage.setItem("qicard_token", data.token);
-    }
+    if (data.token) localStorage.setItem("qicard_token", data.token);
 
     setMsg("تم تسجيل الدخول بنجاح ✅", "success");
 
     setTimeout(() => {
       window.location.href = "dashboard.html";
     }, 600);
-
   } catch (err) {
     setMsg("تعذر الاتصال بالسيرفر.", "error");
   } finally {
     verifyBtn.disabled = false;
   }
 });
-
