@@ -11,8 +11,8 @@ const PORT = process.env.PORT || 3000;
 const JWT_SECRET = process.env.JWT_SECRET || "CHANGE_ME_TO_A_LONG_RANDOM_SECRET";
 const CODE_TTL_MS = 10 * 60 * 1000; // 10 دقائق
 
-// ✅ يسمح بالدومينين (حل التعارض نهائياً)
-const ALLOWED_DOMAINS = ["@qi.iq", "@qicard.iq"];
+// ✅ يسمح فقط ببريد الشركة
+const ALLOWED_DOMAIN = "@qi.iq";
 
 // تخزين مؤقت: sessionId -> { email, code, expiresAt, attempts }
 const sessions = new Map();
@@ -38,10 +38,6 @@ function normalizeEmail(email) {
   return String(email || "").trim().toLowerCase();
 }
 
-function isAllowedEmail(email) {
-  return ALLOWED_DOMAINS.some((d) => email.endsWith(d));
-}
-
 // ===================== Routes =====================
 
 // فحص السيرفر
@@ -61,10 +57,10 @@ app.post("/api/auth/send-code", (req, res) => {
     return res.status(400).json({ success: false, message: "البريد مطلوب" });
   }
 
-  if (!isAllowedEmail(email)) {
+  if (!email.endsWith(ALLOWED_DOMAIN)) {
     return res.status(403).json({
       success: false,
-      message: `يسمح فقط ببريد الشركة (${ALLOWED_DOMAINS.join(" أو ")})`,
+      message: `يسمح فقط ببريد الشركة (${ALLOWED_DOMAIN})`,
     });
   }
 
@@ -78,7 +74,7 @@ app.post("/api/auth/send-code", (req, res) => {
     attempts: 0,
   });
 
-  // للعرض فقط (من Render Logs)
+  // يظهر في Render Logs
   console.log(`[QiCard] Verification code for ${email}: ${code}`);
 
   return res.json({
